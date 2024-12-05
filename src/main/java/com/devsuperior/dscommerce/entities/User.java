@@ -95,7 +95,5 @@ public class User {
     public List<Order> getOrders() {
         return orders;
     }
-
     
-
 }
