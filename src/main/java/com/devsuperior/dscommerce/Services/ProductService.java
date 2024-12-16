@@ -38,7 +38,6 @@ public class ProductService {
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
         product.setImgUrl(productDto.getImgUrl());
-
         product = repository.save(product);
         return new ProductDto(product);
 
