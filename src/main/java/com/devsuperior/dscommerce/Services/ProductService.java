@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.devsuperior.dscommerce.dtos.ProductDto;
 import com.devsuperior.dscommerce.entities.Product;
@@ -31,16 +30,28 @@ public class ProductService {
     
     
     @Transactional
-    public ProductDto insert(@RequestBody ProductDto productDto) {
+    public ProductDto insert(ProductDto productDto) {
+        Product entity = new Product();
+        copyDtoToEntity(productDto, entity);
+        entity = repository.save(entity);
+        return new ProductDto(entity);
 
-        Product product = new Product();
-        product.setName(productDto.getName());
-        product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
-        product.setImgUrl(productDto.getImgUrl());
-        product = repository.save(product);
-        return new ProductDto(product);
+    }
 
+    @Transactional
+    public ProductDto update(Long id, ProductDto productDto) {
+        Product entity = repository.getReferenceById(id);
+        copyDtoToEntity(productDto, entity);
+        entity = repository.save(entity);
+        return new ProductDto(entity);
+
+    }
+
+    private void copyDtoToEntity(ProductDto dto, Product entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
     }
     
 }
