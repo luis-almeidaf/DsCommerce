@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public class ProductDto {
-    
+
     private Long id;
 
     @Size(min = 3, max = 80, message = "Nome precisa ter de 3 a 80 caracteres")
@@ -25,7 +25,7 @@ public class ProductDto {
 
     public ProductDto() {
     }
-      
+
     public ProductDto(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -62,5 +62,4 @@ public class ProductDto {
         return imgUrl;
     }
 
-    
 }
