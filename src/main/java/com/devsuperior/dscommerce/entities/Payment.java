@@ -17,9 +17,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Instant moment;
-
     @OneToOne
     @MapsId
     private Order order;
