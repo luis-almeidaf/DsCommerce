@@ -1,21 +1,11 @@
 package com.devsuperior.dscommerce.entities;
 
-import java.time.LocalDate;
-import java.util.*;
-
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -32,6 +22,7 @@ public class User implements UserDetails {
     private String password;
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -99,6 +90,8 @@ public class User implements UserDetails {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public Set<Role> getRoles() { return roles; }
 
     public void addRole(Role role) {
         roles.add(role);
