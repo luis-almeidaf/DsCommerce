@@ -13,13 +13,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_payment")
 public class Payment {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Instant moment;
-    
+
     @OneToOne
     @MapsId
     private Order order;
@@ -67,19 +67,13 @@ public class Payment {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Payment other = (Payment) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
- 
+
 }
