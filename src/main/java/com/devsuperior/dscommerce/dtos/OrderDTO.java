@@ -3,7 +3,7 @@ package com.devsuperior.dscommerce.dtos;
 import com.devsuperior.dscommerce.entities.Order;
 import com.devsuperior.dscommerce.entities.OrderItem;
 import com.devsuperior.dscommerce.entities.OrderStatus;
-import org.springframework.security.core.parameters.P;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class OrderDTO {
     private OrderStatus status;
     private ClientDTO client;
     private PaymentDTO payment;
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO() {
@@ -47,9 +48,7 @@ public class OrderDTO {
         return moment;
     }
 
-    public OrderStatus getStatus() {
-        return status;
-    }
+    public OrderStatus getStatus() { return status; }
 
     public ClientDTO getClient() {
         return client;
